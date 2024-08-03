@@ -13,7 +13,7 @@ import google.generativeai as genai
 genai.configure(api_key = os.getenv("GOOGLE_API_KEY"))
 
 def get_gemini_response(input, pdf_content, prompt):
-    model = genai.GenerativeModel('gemini-pro-vision')
+    model = genai.GenerativeModel('gemini-1.5-flash')
     response = model.generate_content([input, pdf_content[0], prompt])
     return response
 
@@ -67,7 +67,7 @@ if submit1:
         pdf_content = input_pdf_setup(uploaded_file)
         response = get_gemini_response(input_prompt, pdf_content, input_text)
         st.subheader("The Response is: ")
-        st.write(response)
+        st.write(response.text)
     else: 
         st.write("Please upload the resume.")
         
@@ -76,6 +76,6 @@ if submit3:
         pdf_content = input_pdf_setup(uploaded_file)
         response = get_gemini_response(input_prompt3, pdf_content, input_text)
         st.subheader("The Response is: ")
-        st.write(response)
-    else: 
+        st.write(response.text)
+    else:
         st.write("Please upload the resume.")
